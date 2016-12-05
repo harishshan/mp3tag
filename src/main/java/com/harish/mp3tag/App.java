@@ -2,32 +2,36 @@ package com.harish.mp3tag;
 
 import java.io.File;
 
-import com.harish.mp3tag.util.LogValues;
-import com.harish.mp3tag.util.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- * Hello world!
- *
- */
+
 public class App 
 {
+	private static final Logger logger = LoggerFactory.getLogger(App.class);
     public static void main( String[] args )
     {
         try{
-        	Logger.sysLog(LogValues.debug, App.class.getName(), "Entering into main method");
-        	Logger.sysLog(LogValues.info, App.class.getName(), "Album Rename process starting");
+        	//Java Logging Configuration
+        	java.util.logging.Logger rootLogger = java.util.logging.Logger.getLogger("");
+        	rootLogger.setLevel(java.util.logging.Level.WARNING);
+        	rootLogger.getHandlers()[0].setLevel(java.util.logging.Level.WARNING);
+        	logger.info("Entering into main method- Album Rename process starting");
+        	
+        	String path = "C:\\Harish\\Songs\\Music";
+        	if(args.length == 1)
+        		path = args[0];
         	AlbumRenamer albumRenamer = new AlbumRenamer();
-        	File rootFolder = new File("D:/test");
+        	File rootFolder = new File(path);
         	if(rootFolder.exists()){
         		albumRenamer.execute(rootFolder);
         	}else{
-        		Logger.sysLog(LogValues.info, App.class.getName(), "No file/folder found");
-        	}
-        	Logger.sysLog(LogValues.info, App.class.getName(), "Album Rename process finished");
+        		logger.info("No file/folder found");
+        	}        	
         }catch(Exception ex){
-        	Logger.sysLog(LogValues.error, App.class.getName(), ex);
+        	logger.error("Exception:",ex);
         }finally{
-        	Logger.sysLog(LogValues.debug, App.class.getName(), "Exiting from main method");
+        	logger.info("Exiting from main method");
         }
     }
     

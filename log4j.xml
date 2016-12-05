@@ -18,7 +18,7 @@
 		</layout>
 	</appender>
 	<logger name="com.harish" additivity="true">
-		<level value="debug" />
+		<level value="info" />
 	</logger>
 	<logger name="com" additivity="true">
 		<level value="error" />
@@ -31,9 +31,12 @@
 	</logger>	
 	<logger name="java.net" additivity="true">
 		<level value="error" />
-	</logger>	
+	</logger>
+	<logger name="org.jaudiotagger" additivity="true">
+	    <level value="error" />
+	</logger>
 	<root>
-		<priority value="debug" />
+		<priority value="info" />
 		<appender-ref ref="FILE" />
 		<appender-ref ref="CONSOLE" /> 
 	</root>
